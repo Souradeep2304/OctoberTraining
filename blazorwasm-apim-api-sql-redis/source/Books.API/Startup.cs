@@ -33,13 +33,13 @@ namespace Books.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services
-                .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddJwtBearer(options =>
-                {
-                    options.Authority = Configuration["Auth0:Authority"];
-                    options.Audience = Configuration["Auth0:Audience"];
-                });
+            //services
+            //    .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            //    .AddJwtBearer(options =>
+            //    {
+            //        options.Authority = Configuration["Auth0:Authority"];
+            //        options.Audience = Configuration["Auth0:Audience"];
+            //    });
 
             services.AddCors(options =>
             {
@@ -62,9 +62,9 @@ namespace Books.API
             services.Configure<DataStoreSettings>(Configuration.GetSection(nameof(DataStoreSettings)));
             services.AddSingleton<IDataStoreSettings>(sp => sp.GetRequiredService<IOptions<DataStoreSettings>>().Value);
 
-            services.AddSingleton<IRedisCacheDbContext, RedisCacheDbContext>();
+            //services.AddSingleton<IRedisCacheDbContext, RedisCacheDbContext>();
             services.AddScoped<IBooksBll, BooksBll>();
-            services.AddScoped<IBookCacheRepository, BookCacheRepository>();
+            //services.AddScoped<IBookCacheRepository, BookCacheRepository>();
 
             services.AddScoped<IBookRepository, BookRepository>();
             services.AddApplicationInsightsTelemetry(Configuration["APPINSIGHTS_CONNECTIONSTRING"]);
@@ -86,9 +86,9 @@ namespace Books.API
 
             app.UseCors(_corsPolicyName);
 
-            app.UseAuthentication();
+            //app.UseAuthentication();
 
-            app.UseAuthorization();
+            //app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

@@ -13,14 +13,14 @@ namespace BooksStore.Bll
     public class BooksBll : IBooksBll
     {
         private readonly IBookRepository _bookRepository;
-        private readonly IBookCacheRepository _bookCacheRepository;
+        //private readonly IBookCacheRepository _bookCacheRepository;
         private readonly ILogger<BooksBll> _logger;
 
-        public BooksBll(IBookRepository bookRepository, IBookCacheRepository bookCacheRepository, ILogger<BooksBll> logger)
+        public BooksBll(IBookRepository bookRepository, ILogger<BooksBll> logger)
         {
             _bookRepository = bookRepository ?? throw new ArgumentNullException(nameof(bookRepository));
 
-            _bookCacheRepository = bookCacheRepository ?? throw new ArgumentNullException(nameof(bookCacheRepository));
+            //_bookCacheRepository = bookCacheRepository ?? throw new ArgumentNullException(nameof(bookCacheRepository));
 
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
@@ -33,7 +33,7 @@ namespace BooksStore.Bll
                             .AddBook(book)
                             .ConfigureAwait(false);
 
-            await RemoveAllBooksDataFromCache(Constants.RedisCacheStore.AllBooksKey);
+            //await RemoveAllBooksDataFromCache(Constants.RedisCacheStore.AllBooksKey);
 
             _logger.LogInformation("Sending output from BooksBll::AddBook() request.");
 
@@ -46,23 +46,23 @@ namespace BooksStore.Bll
 
             _logger.LogInformation("Received the BooksBll::GetAllBooks() request.");
 
-            var booksFromCache = await _bookCacheRepository
-                    .RetrieveItemFromCache(Constants.RedisCacheStore.AllBooksKey);
+            //var booksFromCache = await _bookCacheRepository
+            //        .RetrieveItemFromCache(Constants.RedisCacheStore.AllBooksKey);
 
-            if (!string.IsNullOrEmpty(booksFromCache))
-            {
-                books = JsonSerializer.Deserialize<IEnumerable<Book>>(booksFromCache);
-            }
-            else
-            {
+            //if (!string.IsNullOrEmpty(booksFromCache))
+            //{
+            //    books = JsonSerializer.Deserialize<IEnumerable<Book>>(booksFromCache);
+            //}
+            //else
+            //{
                 books = await _bookRepository
                             .GetAllBooks()
                             .ConfigureAwait(false);
 
-                _ = await _bookCacheRepository.SaveOrUpdateItemToCache(
-                        Constants.RedisCacheStore.AllBooksKey,
-                        JsonSerializer.Serialize(books));
-            }
+                //_ = await _bookCacheRepository.SaveOrUpdateItemToCache(
+                //        Constants.RedisCacheStore.AllBooksKey,
+                //        JsonSerializer.Serialize(books));
+            //}
 
             _logger.LogInformation("Sending output from BooksBll::GetAllBooks() request.");
 
@@ -84,7 +84,7 @@ namespace BooksStore.Bll
 
         private async Task RemoveAllBooksDataFromCache(string redisCacheKey)
         {
-            await _bookCacheRepository.DeleteItemFromCache(redisCacheKey);
+            //await _bookCacheRepository.DeleteItemFromCache(redisCacheKey);
         }
     }
 
