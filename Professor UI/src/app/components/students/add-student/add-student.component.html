@@ -1,0 +1,48 @@
+<div class="card mt-2 mb-2">
+  <div class="card-header">
+    <h2 class="PageTitle">Add Student</h2>
+  </div>
+  <div class="card-body">
+
+   <!-- Form -->
+   <div class="col-md-8 mb-4" >
+    <form [formGroup]="studentForm" (ngSubmit)="onStudentAdd(studentForm.value)"
+      novalidate>
+
+ 
+      <div class="form-group divflex labelAndTextbox">
+        <label class="element col-md-2">Name : </label>
+        <input type="text" formControlName="name" class="form-control element ml-4" 
+          maxlength="50">
+      </div> 
+
+      <div class="form-group divflex labelAndTextbox">
+        <label class="element col-md-2">Roll Number : </label>
+        <input type="text" formControlName="RollNumber" class="form-control element ml-4" 
+          maxlength="10" >
+      </div>
+
+      <div class="form-group divflex labelAndTextbox">
+        <label class="element col-md-2">Fees : </label>
+        <input type="number" formControlName="Fees" class="form-control element ml-4" 
+          maxlength="50">
+      </div>
+
+      <div class="form-group divflex labelAndTextbox">
+        <label class="element col-md-2">Department : </label>
+        <input type="text" formControlName="Department" class="form-control element ml-4" 
+          maxlength="50">
+      </div>
+
+     
+
+      <button type="submit" class="btn btn-primary">
+        <i class="fa fa-plus" aria-hidden="true"></i> Add Student</button>
+      <button type="button" class="btn btn-info ml-2" [routerLink]="['/students']">
+        <i class="fa fa-table" aria-hidden="true"></i> Students List</button> 
+   
+    </form>
+
+
+  </div>
+</div>

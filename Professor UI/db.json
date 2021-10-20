@@ -1,0 +1,9 @@
+{
+    "professors":
+    {
+        "professorId": "MR. ABC",
+        "name": "string",
+        "doj": "Date",
+        "teaches": "string"
+    }
+}
