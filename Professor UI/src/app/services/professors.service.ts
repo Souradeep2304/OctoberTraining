@@ -8,7 +8,7 @@ import { ProfessorDto, AddProfessorDto } from '../interfaces/professor.Dto';
 
 
 
-const baseUrl = "https://oct-train-api.azurewebsites.net/api";
+const baseUrl = "YOUT URL";
 const apiName = 'professors';
 const httpOptions = {
   headers: new HttpHeaders({
